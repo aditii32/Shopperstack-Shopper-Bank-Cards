@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "0f33d9bd-89e4-44be-8c1e-658d9091ccbb",
+		"name": "Shopper Bank Cards",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33643733",
+		"_collection_link": "https://www.postman.com/spacecraft-specialist-7984735/workspace/shopperstack/collection/33643733-0f33d9bd-89e4-44be-8c1e-658d9091ccbb?action=share&source=collection_link&creator=33643733"
+	},
+	"item": [
+		{
+			"name": "Creates the new card for a given bank",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWTtoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/cards?bankName=TBI&cardType=DEBIT&email=adi@gmail.com&name=Aditi BAnsode&shopperId=55906",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"cards"
+					],
+					"query": [
+						{
+							"key": "bankName",
+							"value": "TBI"
+						},
+						{
+							"key": "cardType",
+							"value": "DEBIT"
+						},
+						{
+							"key": "email",
+							"value": "adi@gmail.com"
+						},
+						{
+							"key": "name",
+							"value": "Aditi BAnsode"
+						},
+						{
+							"key": "shopperId",
+							"value": "55906"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update card balance",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWTtoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/cards?amount=10000&cardNumber=5014401191607726",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"cards"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "10000"
+						},
+						{
+							"key": "cardNumber",
+							"value": "5014401191607726"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validates bank card with amount",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWTtoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"balance\": 20000,\r\n  \"bankName\": \"TBI\",\r\n  \"cardId\": 6889,\r\n  \"cardType\": \"DEBIT\",\r\n  \"cvv\": 111,\r\n  \"email\": \"adi@gmail.com\",\r\n  \"expiryDate\": \"3/29\",\r\n  \"nameOnCard\": \"Aditi BAnsode\",\r\n  \"number\": \"5014401191607726\",\r\n  \"pin\": 8896,\r\n  \"shopperId\":55906 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/cards/transaction/?amount=10000",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"cards",
+						"transaction",
+						""
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validates bank card",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWTtoken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"balance\": 100000,\r\n  \"bankName\": \"TBI\",\r\n  \"cardId\": 6889,\r\n  \"cardType\": \"DEBIT\",\r\n  \"cvv\": 111,\r\n  \"email\": \"adi@gmail.com\",\r\n  \"expiryDate\": \"3/29\",\r\n  \"nameOnCard\": \"Aditi BAnsode\",\r\n  \"number\": \"5014401191607726\",\r\n  \"pin\": 8896,\r\n  \"shopperId\": 55906\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/cards/verify",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"cards",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
